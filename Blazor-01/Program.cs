@@ -22,4 +22,6 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>();
 
+/* The following will start the web host and block the calling thread until shutdown */
+
 app.Run();
