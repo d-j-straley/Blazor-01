@@ -4,6 +4,19 @@
 <h3>Servers</h3>
 <br />
 <br />
+<p>
+@*         List of servers in the selected city:
+ *@
+    @foreach (var city in cities)
+    {
+        <span>
+            <button @onclick="() => servers = ServersRepository.GetServersByCity(city)">
+                @city
+                </button></span>
+    }
+    
+
+</p>
 <ul>
     @foreach (var server in servers)
     {
@@ -19,6 +32,6 @@
 
 @code {
     private List<Server> servers = ServersRepository.GetServersByCity("Toronto");
-    
+    private List<string> cities = CitiesRepository.GetCities();
         
 }
