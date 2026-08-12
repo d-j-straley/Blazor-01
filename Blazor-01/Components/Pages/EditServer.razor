@@ -1,18 +1,48 @@
 ﻿@page "/servers/{serverID:int}"
 <h3>Edit Server</h3>
 <br />
-<br />
-The ID is @serverID 
-<br />
+@if (server != null)
+{
+    /*
+    <EditForm Model="@server" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="mb-3">
+            <label for="name" class="form-label">Server Name</label>
+            <InputText id="name" class="form-control" @bind-Value="server.Name" />
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <InputText id="city" class="form-control" @bind-Value="server.City" />
+        </div>
+        <div class="mb-3 form-check">
+            <InputCheckbox id="isOnline" class="form-check-input" @bind-Value="server.IsOnline" />
+            <label for="isOnline" class="form-check-label">Is Online</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+    */
+    <p>
+        @server.Name in @server.City is @(server.IsOnline ? "online" : "offline")
+    </p>
 
+}
+else
+{
+    <p>Server not found.</p>
+}
+
+<a href="/servers" class="btn btn-light">Back to Servers</a>
 
 @code {
     [Parameter]
     public int serverID { get; set; }
     private Server? server;
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
+        base.OnParametersSet();
         server = ServersRepository.GetServerById(serverID);
+
     }
 
 }
