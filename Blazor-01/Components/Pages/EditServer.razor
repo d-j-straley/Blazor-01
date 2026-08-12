@@ -1,4 +1,4 @@
-﻿@page "/servers/{serverID}"
+﻿@page "/servers/{serverID:int}"
 <h3>Edit Server</h3>
 <br />
 <br />
@@ -8,19 +8,11 @@ The ID is @serverID
 
 @code {
     [Parameter]
-    public string? serverID { get; set; }
+    public int serverID { get; set; }
     private Server? server;
     protected override void OnInitialized()
     {
-        if (!string.IsNullOrEmpty(serverID) && int.TryParse(serverID, out int id))
-        {
-            if (id < 1)
-            {
-                throw new ArgumentException("Server ID must be greater than 0.");
-            }
-
-            server = ServersRepository.GetServerById(id);
-        }
+        server = ServersRepository.GetServerById(serverID);
     }
 
 }
