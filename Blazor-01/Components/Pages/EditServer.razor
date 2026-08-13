@@ -24,7 +24,8 @@
     </EditForm>
     */
 
-    <EditForm Model="server">
+    // each form must have a unique name; this is why we are using FormName="formServer" here
+    <EditForm Model="server" FormName="formServer" OnSubmit="Submit">
         <div class="row mb-3">
             <div class="col-2">
                 <label class="col-form-label">Name</label>
@@ -69,12 +70,29 @@ else
 @code {
     [Parameter]
     public int serverID { get; set; }
-    private Server? server;
+
+    [SupplyParameterFromForm(FormName = "formServer")] // this will enable Blazor framework to bind the form data to this property when the form is submitted
+    private Server? server { get; set; } // this had to be changed to a property
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         server = ServersRepository.GetServerById(serverID);
 
+    }
+
+    // DJS: herein is the crux of why Blazor is so special; 
+    // It allows us to submit using C# code instead of having to use JavaScript.  
+    // 
+    private void Submit(EditContext editContext)
+    {
+        /*
+        if (editContext.Validate())
+        {
+            ServersRepository.UpdateServer(server);
+            NavigationManager.NavigateTo("/servers");
+        }
+        */
     }
 
 }
