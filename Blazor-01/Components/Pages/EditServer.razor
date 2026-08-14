@@ -85,6 +85,10 @@ else
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
+// DJS: there is a bug here; if the location is updated, then when you
+        // return to Servers page, that server will be missing.  This is because the server object is being updated in memory, but not in the repository.  Therefore, when you return to the Servers page, it will not find that server in the repository.  To fix this, we need to update the server in the repository when the form is submitted.  This is done in the Submit method below.
+
         server ??= ServersRepository.GetServerById(serverID);
 
     }
@@ -99,8 +103,14 @@ else
         {
             ServersRepository.UpdateServer(server);
             NavigationManager.NavigateTo("/servers");
-        }
+            }
         */
+
+    if (server != null)
+        {
+            ServersRepository.UpdateServer(server.ServerID, server);
+            // NavigationManager.NavigateTo("/servers");
+        }
     }
 
 }
