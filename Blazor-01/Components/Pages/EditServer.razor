@@ -26,6 +26,16 @@
 
     // each form must have a unique name; this is why we are using FormName="formServer" here
     <EditForm Model="server" FormName="formServer" OnSubmit="Submit">
+
+@*         The reason we need to add this hidden field is this: we are binding the "server" object to the form
+        submission process, and this "server" object has multiple fields which each must have a value.  Presumably,
+        those values are all zero or null by default, until they get set during the form submit process.  But if we
+        do not set a given variable, it will remain as "zero".  That's what will happen with the "server.ServerID" since
+        we do not put that variable on the screen.  That means that we don't know where this data came from, i.e. which 
+        ServerID.  Therefore, by putting in a *hidden* value, it will get filled in automatically along with the other
+        variables in the "server" object.
+ *@        
+        <InputNumber @bind-Value="server.ServerID" hidden></InputNumber>
         <div class="row mb-3">
             <div class="col-2">
                 <label class="col-form-label">Name</label>
