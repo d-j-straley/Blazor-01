@@ -46,18 +46,17 @@
 
         <div class="row mb-3">
             <div class="col-2">
-                <label class="col-form-label">Online Status</label>
+                <label class="col-form-label">Online?</label>
             </div>
             <div class="col-6">
                 <InputCheckbox class="form-check-input" @bind-Value="server.IsOnline"></InputCheckbox>
             </div>
         </div>
+        <button class="btn btn-outline-secondary" type="submit">Update</button>
+        &nbsp;
+        <a href="/servers" class="btn btn-light">Back to Servers</a>
 
     </EditForm>
-
-    
-
-
 
 }
 else
@@ -65,7 +64,6 @@ else
     <p>Server not found.</p>
 }
 
-<a href="/servers" class="btn btn-light">Back to Servers</a>
 
 @code {
     [Parameter]
@@ -77,7 +75,7 @@ else
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        server = ServersRepository.GetServerById(serverID);
+        server ??= ServersRepository.GetServerById(serverID);
 
     }
 
