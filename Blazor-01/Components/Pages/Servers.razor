@@ -41,7 +41,8 @@
 
 
 @code {
-    private List<Server> servers = ServersRepository.GetServersByCity("Toronto");
+    private List<Server> servers = ServersRepository.GetServers();
+    //    private List<Server> servers = ServersRepository.GetServersByCity("Toronto");
     private List<string> cities = CitiesRepository.GetCities();
         
 }

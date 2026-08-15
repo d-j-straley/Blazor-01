@@ -87,7 +87,13 @@ else
         base.OnParametersSet();
 
 // DJS: there is a bug here; if the location is updated, then when you
-        // return to Servers page, that server will be missing.  This is because the server object is being updated in memory, but not in the repository.  Therefore, when you return to the Servers page, it will not find that server in the repository.  To fix this, we need to update the server in the repository when the form is submitted.  This is done in the Submit method below.
+        // return to Servers page, that server will be missing.  This is because the server object is being updated in memory, but not in the repository.  
+        // // Therefore, when you return to the Servers page, it will not find that server in the repository.  
+        // To fix this, we need to update the server in the repository when the form is submitted.  This is done in the Submit method below.
+        // Note that this *does work correctly now* - what was appearing to be wrong was that I had updated the location of a server,
+// but in the code I was hardcoding to only pull servers from Toronto, so when I redisplayed the list of servers,
+// since I had changed one of my servers from Toronto to Montreal (for example), naturally , the updated server would not
+// show up in the list of servers in Toronto.  Duh.
 
         server ??= ServersRepository.GetServerById(serverID);
 

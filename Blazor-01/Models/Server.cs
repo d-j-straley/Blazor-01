@@ -1,4 +1,6 @@
-﻿namespace Blazor_01.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Blazor_01.Models
 {
     public class Server
     {
@@ -11,7 +13,9 @@
 
         public int ServerID { get; set; }
         public bool IsOnline { get; set; }
+        [Required]
         public string? Name { get; set; }
+        [Required]
         public string? City { get; set; }   
     }
 }
