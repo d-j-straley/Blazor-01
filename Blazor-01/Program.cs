@@ -5,6 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents();
 
+// I could also add my own services here, for example, and use
+// builder.Services.AddSingleton<IMyService, MyServiceImplementation>();
+// builder.Services.AddScoped<IMyService, MyServiceImplementation>();
+// builder.Services.AddTransient<IMyService, MyServiceImplementation>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
