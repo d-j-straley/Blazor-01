@@ -1,14 +1,16 @@
-﻿@page "/addserver"
+﻿@page "/servers/add"
 <h3>Add Server</h3>
 <br />
 
-<h3>AddServer</h3>
 
 @inject NavigationManager NavigationManager
 
 <EditForm Model="server" FormName="formAddServer" OnSubmit="Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
+
+    <InputNumber @bind-Value="server.ServerID" hidden></InputNumber>
+
     <div class="row mb-3">
         <div class="col-2">
             <label class="col-form-label">Name</label>
@@ -40,16 +42,19 @@
         </div>
     </div>
 <button type="submit" class="btn btn-primary">Save</button>
+&nbsp;
+<a href="/servers" class="btn btn-primary">Close</a>
+
 
 </EditForm>
 
 @code {
-
-    private Server? server { get; set; } = new Server();
+    [SupplyParameterFromForm]
+    private Server? server { get; set; } = new Server() { ServerID = 0, Name = "", City = "", IsOnline = false };
 
     private void Submit()
     {
-        if (server != null)
+        //if (server != null && NavigationManager != null)
         {
             // Here you would typically save the server to a database or perform some action
             // Console.WriteLine($"Server Name: {server.Name}, City: {server.City}, Is Online: {server.IsOnline}");
